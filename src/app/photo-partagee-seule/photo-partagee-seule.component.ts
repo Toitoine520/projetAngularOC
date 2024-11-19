@@ -60,7 +60,7 @@ export class PhotoPartageeSeuleComponent implements OnInit {
       'Réagie'
     );
     this.imageLikee = true;
-    this.textBouton = 'Nope nope nope';
+    this.textBouton = 'Retirer la réaction';
   }
 
   /**
@@ -72,7 +72,7 @@ export class PhotoPartageeSeuleComponent implements OnInit {
       'Non réagie'
     );
     this.imageLikee = false;
-    this.textBouton = 'Ouh lalaaaaa';
+    this.textBouton = 'Réagir';
   }
   /**
    * permet de voir quand l'utilisateur a déjà réagit ou non
@@ -82,13 +82,21 @@ export class PhotoPartageeSeuleComponent implements OnInit {
     return this.imageLikee;
   }
 
+  /**
+   * Récupère la photo à partir de l'id dans la route
+   */
   private getPhoto(): void {
     const idPhoto = this.route.snapshot.params['id'];
     this.photoPartagee = this.photosPartageesService.getPhotoParId(idPhoto);
   }
 
+  /**
+   * Variables à instancier à l'affichage
+   */
   private preparerInterface() {
     this.imageLikee = false;
-    this.textBouton = 'Ouh lalaaaaa';
+    console.log(this.imageLikee);
+    this.textBouton = 'Réagir';
+    const idPhoto = this.route.snapshot.params['id'];
   }
 }

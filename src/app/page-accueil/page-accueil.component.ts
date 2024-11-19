@@ -11,6 +11,9 @@ import { Router, RouterLink } from '@angular/router';
 export class PageAccueilComponent {
   constructor(private router: Router) {}
 
+  /**
+   * Permet d'aller à la liste des photos partagees
+   */
   onContinue() {
     this.router.navigateByUrl('photospartagees');
   }

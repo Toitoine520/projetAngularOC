@@ -1,4 +1,4 @@
-<div class="snap-card" [ngClass]="{ 'photo-likee': isPhotoLikee() }">
+<div class="block-photo" [ngClass]="{ 'photo-likee': isPhotoLikee() }">
   <a routerLink="/photospartagees">Retour</a>
   <h2>{{ photoPartagee.title | titlecase }}</h2>
   <img [src]="photoPartagee.urlImage" [alt]="photoPartagee.title" />
@@ -11,6 +11,6 @@
   <p>{{ photoPartagee.description }}</p>
   <p>
     <button (click)="onToggleReaction()">{{ textBouton }}</button>
-    <span [ngStyle]="{ color: 'rgb(0, '+ photoPartagee.nbreReactions +', 0)'}"> 🍆 {{ photoPartagee.nbreReactions }} </span>
+    <span [ngStyle]="{ color: 'rgb(0, '+ photoPartagee.nbreReactions +', 0)'}"> ⭐ {{ photoPartagee.nbreReactions }} </span>
   </p>
 </div>

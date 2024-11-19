@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { PhotoPartagee } from '../models/photo-partagee';
-import { PhotosPartageesService } from '../services/photos-partagees.service';
 import { Router } from '@angular/router';
 
 @Component({

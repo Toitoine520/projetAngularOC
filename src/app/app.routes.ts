@@ -4,7 +4,7 @@ import { PageAccueilComponent } from './page-accueil/page-accueil.component';
 import { PhotoPartageeSeuleComponent } from './photo-partagee-seule/photo-partagee-seule.component';
 
 export const routes: Routes = [
-  { path: 'photospartagees/:id', component: PhotoPartageeSeuleComponent },
   { path: '', component: PageAccueilComponent },
   { path: 'photospartagees', component: ListePhotosPartageesComponent },
+  { path: 'photospartagees/:id', component: PhotoPartageeSeuleComponent },
 ];

@@ -23,15 +23,28 @@ export class PhotosPartageesService {
     ),
   ];
 
+  /**
+   * Récupère un tableau de photos
+   * @returns PhotoPartagee[]
+   */
   getPhotosPartagees(): PhotoPartagee[] {
     return [...this.photosPartagees];
   }
-
+  /**
+   * Permet de réagir à la photo par son id
+   * @param idPhoto string
+   * @param typePhoto TypePhoto
+   */
   reagirALaPhotoParId(idPhoto: string, typePhoto: TypePhoto): void {
     const photo = this.getPhotoParId(idPhoto);
     photo.reagir(typePhoto);
   }
 
+  /**
+   * Récupère une photo par son id
+   * @param idPhoto string
+   * @returns PhotoPartagee
+   */
   getPhotoParId(idPhoto: string): PhotoPartagee {
     const photoTrouvee = this.photosPartagees.find(
       (photoPartagee) => photoPartagee.id === idPhoto
