@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { RouterOutlet } from '@angular/router';
-import { combineLatest, filter, interval, map, Observable, Subscription, tap, timer } from 'rxjs';
+import { combineLatest, delay, filter, interval, map, mergeMap, Observable, of, Subscription, take, tap, timer } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { OperatorSubscriber } from 'rxjs/internal/operators/OperatorSubscriber';
 
@@ -21,31 +21,32 @@ export class AppComponent {
 
   timers$!: Subscription;
 
+
+  redTrainsCalled = 0;
+  blueTrainsCalled = 0;
+
   ngOnInit(): void {
-    this.interval$ = interval(1000).pipe(
-      filter((value) => value % 3 !== 0),
-      map((value) =>
-        value < 10
-          ? `${value} est inférieur 10`
-          : value === 10
-          ? `${value} est égal à 10`
-          : `${value} est supérieur à 10`
-      ),
-      tap((value) => this.logger(value))
-    );
+    interval(500).pipe(
+      take(10),
+      map(value => value % 2 === 0 ? 'rouge' : 'bleu'),
+      tap(color => console.log(`La lumière s'allume en %c${color}`, `color: ${this.translateColor(color)}`)),
+      mergeMap(color => this.getTrainObservable$(color)),
+      tap(train => console.log(`Le train %c${train.color} ${train.trainIndex} entre en gare !`, `font-weight: bold; color: ${this.translateColor(train.color)}`))
+    ).subscribe();
+  }
 
-    this.timers$ = combineLatest(this.timer1$, this.timer2$, this.timer3$).subscribe(
-      ([timer1, timer2, timer3]) => {
-        console.log(
-          `timer 1 : ${timer1}`,
-          `timer 2 : ${timer2}`,
-          `timer 3 : ${timer3}`,
-        );
-      }
+  getTrainObservable$(color: 'rouge' | 'bleu') {
+    const isRedTrain = color === 'rouge';
+    isRedTrain ? this.redTrainsCalled++ : this.blueTrainsCalled++;
+    const trainIndex = isRedTrain ? this.redTrainsCalled : this.blueTrainsCalled;
+    console.log(`Train %c${color} ${trainIndex} appelé !`, `text-decoration: underline; color: ${this.translateColor(color)}`);
+    return of({ color, trainIndex }).pipe(
+      delay(isRedTrain ? 5000 : 6000)
     );
   }
 
-  logger(texte: string) {
-    console.log(`Log : ${texte}`);
+  translateColor(color: 'rouge' | 'bleu') {
+    return color === 'rouge' ? 'red' : 'blue';
   }
+
 }
