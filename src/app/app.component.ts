@@ -25,28 +25,5 @@ export class AppComponent {
   redTrainsCalled = 0;
   blueTrainsCalled = 0;
 
-  ngOnInit(): void {
-    interval(500).pipe(
-      take(10),
-      map(value => value % 2 === 0 ? 'rouge' : 'bleu'),
-      tap(color => console.log(`La lumière s'allume en %c${color}`, `color: ${this.translateColor(color)}`)),
-      mergeMap(color => this.getTrainObservable$(color)),
-      tap(train => console.log(`Le train %c${train.color} ${train.trainIndex} entre en gare !`, `font-weight: bold; color: ${this.translateColor(train.color)}`))
-    ).subscribe();
-  }
-
-  getTrainObservable$(color: 'rouge' | 'bleu') {
-    const isRedTrain = color === 'rouge';
-    isRedTrain ? this.redTrainsCalled++ : this.blueTrainsCalled++;
-    const trainIndex = isRedTrain ? this.redTrainsCalled : this.blueTrainsCalled;
-    console.log(`Train %c${color} ${trainIndex} appelé !`, `text-decoration: underline; color: ${this.translateColor(color)}`);
-    return of({ color, trainIndex }).pipe(
-      delay(isRedTrain ? 5000 : 6000)
-    );
-  }
-
-  translateColor(color: 'rouge' | 'bleu') {
-    return color === 'rouge' ? 'red' : 'blue';
-  }
-
+  ngOnInit(): void { }
 }
