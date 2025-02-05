@@ -2,18 +2,25 @@ header {
   text-align: center;
   margin-bottom: 20px;
   padding: 10px;
-}
 
-a {
-  margin: 0 10px;
-  color: #333;
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
+  a {
+    margin: 0 10px;
+    color: #333;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+    &.active {
+      color: #666;
+      text-decoration: underline;
+    }
   }
-}
 
-.active {
-  color: #666;
-  text-decoration: underline;
+  button {
+    &.active{
+      background-color: gray;
+      color: white;
+    }
+  }
+
 }
